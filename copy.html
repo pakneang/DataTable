@@ -1,0 +1,379 @@
+<div>
+  <span id="utq" class="qualityp"
+    ><span
+      ><span class="uptime hbad"
+        ><span>Downtime:</span
+        ><span title="Faulty (100% Downtime)"
+          >100<span class="units nosp">%</span></span
+        ></span
+      ></span
+    ></span
+  ><span id="plq" class="qualityp"
+    ><span
+      ><span class="ploss hbad"
+        ><span>Packet Loss:</span
+        ><span title="Low (> 20%)"
+          >100<span class="units nosp">%</span></span
+        ></span
+      ></span
+    ></span
+  ><span id="lq" class="qualityp"
+    ><span
+      ><span class="latency"
+        ><span>Latency:</span><span title="">[n/a]<!----></span></span
+      ></span
+    ></span
+  ><!----><span id="cvq" class="qualityp"
+    ><span
+      ><span class="cv"
+        ><span>CV:</span><span title="">[n/a]<!----></span></span
+      ></span
+    ></span
+  ><span id="mosq" class="qualityp"
+    ><span
+      ><span class="_mos"
+        ><span>MOS:</span><span title="">[n/a]</span></span
+      ></span
+    ></span
+  >
+</div>
+
+<span class="uptime hbad"
+  ><span>Downtime:</span
+  ><span title="Faulty (100% Downtime)"
+    >100<span class="units nosp">%</span></span
+  ></span
+>
+
+<div class="dropdown">
+  <a
+    class="btn btn-secondary dropdown-toggle"
+    href="#"
+    role="button"
+    id="dropdownMenuLink"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+  >
+    Dropdown link
+  </a>
+
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+  </ul>
+</div>
+<div id="bar_zone">
+  <div id="period-vue" class="period-wrapper vue done">
+    <div data-offset="0" data-format="" class="period-ranges">
+      <span>8</span>/<span>4</span>/<span>2</span><span>0</span><span>2</span
+      ><span>3</span> <span>1</span><span>0</span>:<span>5</span
+      ><span>6</span> AM - <span>8</span>/<span>4</span>/<span>2</span
+      ><span>0</span><span>2</span><span>3</span> <span>1</span
+      ><span>1</span>:<span>0</span><span>1</span> AM
+    </div>
+    <div
+      id="period"
+      data-note=""
+      title="Period
+    Select the time interval to be used for displaying the monitoring statistics."
+      class="period chooser select"
+    >
+      <span>Period:</span>
+      <div class="placeholder">5 Minutes</div>
+      <div class="control_back" style="display: none; z-index: 180"></div>
+      <ul class="">
+        <li></li>
+        <li>5 Minutes</li>
+        <li data-value="300" class="">
+          <a
+            href="https://demo.emcosoftware.com/ping-monitor/statistics?timezone=Asia%2fBangkok"
+            >5 Minutes</a
+          >
+        </li>
+        <li data-value="900" class="">
+          <a
+            href="https://demo.emcosoftware.com/ping-monitor/statistics?timezone=Asia%2fBangkok&amp;start=900"
+            >15 Minutes</a
+          >
+        </li>
+        <li data-value="1800" class="">
+          <a
+            href="https://demo.emcosoftware.com/ping-monitor/statistics?timezone=Asia%2fBangkok&amp;start=1800"
+            >30 Minutes</a
+          >
+        </li>
+        <li data-value="3600" class="">
+          <a
+            href="https://demo.emcosoftware.com/ping-monitor/statistics?timezone=Asia%2fBangkok&amp;start=3600"
+            >60 Minutes</a
+          >
+        </li>
+        <li data-value="10800" class="">
+          <a
+            href="https://demo.emcosoftware.com/ping-monitor/statistics?timezone=Asia%2fBangkok&amp;start=10800"
+            >3 Hours</a
+          >
+        </li>
+        <li data-value="21600" class="endgroup">
+          <a
+            href="https://demo.emcosoftware.com/ping-monitor/statistics?timezone=Asia%2fBangkok&amp;start=21600"
+            >6 Hours</a
+          >
+        </li>
+        <li data-value="yesterday" class="">
+          <a
+            href="https://demo.emcosoftware.com/ping-monitor/statistics?timezone=Asia%2fBangkok&amp;start=yesterday"
+            >Yesterday</a
+          >
+        </li>
+        <li data-value="lastweek" class="">
+          <a
+            href="https://demo.emcosoftware.com/ping-monitor/statistics?timezone=Asia%2fBangkok&amp;start=lastweek"
+            >Last Week</a
+          >
+        </li>
+        <li data-value="lastmonth" class="">
+          <a
+            href="https://demo.emcosoftware.com/ping-monitor/statistics?timezone=Asia%2fBangkok&amp;start=lastmonth"
+            >Last Month</a
+          >
+        </li>
+        <li data-value="last7days" class="">
+          <a
+            href="https://demo.emcosoftware.com/ping-monitor/statistics?timezone=Asia%2fBangkok&amp;start=last7days"
+            >Last 7 Days</a
+          >
+        </li>
+        <li data-value="last30days" class="">
+          <a
+            href="https://demo.emcosoftware.com/ping-monitor/statistics?timezone=Asia%2fBangkok&amp;start=last30days"
+            >Last 30 Days</a
+          >
+        </li>
+        <li data-value="custom" class="">Custom Range</li>
+      </ul>
+    </div>
+    <div class="dh">
+      <input
+        type="hidden"
+        id="drf"
+        value=""
+        autocomplete="off"
+        class="daterange"
+        style="display: none"
+      /><button
+        type="button"
+        class="comiseo-daterangepicker-triggerbutton ui-button ui-corner-all ui-widget comiseo-daterangepicker-bottom"
+        id="drp_autogen0"
+      >
+        <span class="ui-button-icon-space"> </span
+        ><span class="ui-button-icon ui-icon ui-icon-triangle-1-s"></span>
+      </button>
+    </div>
+  </div>
+  <div
+    class="settings_menu nm"
+    title="Advanced Options
+    Show the list of available advanced options."
+  >
+    <ul title="">
+      <li class="noclose">
+        <a class="tb-bttn refresh-time dd"><span>Refresh Interval</span></a>
+        <ul data-id="rdelay" data-auto="3" class="delay">
+          <li>
+            <a class="tb-bttn stop-refresh" href="javascript:void(0)" title=""
+              ><span>None</span></a
+            >
+          </li>
+          <li data-delay="Auto">
+            <a class="tb-bttn on" href="javascript:void(0)" title=""
+              ><span>Auto</span></a
+            >
+          </li>
+          <li data-delay="1">
+            <a class="tb-bttn" href="javascript:void(0)" title=""
+              ><span>1 sec</span></a
+            >
+          </li>
+          <li data-delay="3">
+            <a class="tb-bttn" href="javascript:void(0)" title=""
+              ><span>3 sec</span></a
+            >
+          </li>
+          <li data-delay="5">
+            <a class="tb-bttn" href="javascript:void(0)" title=""
+              ><span>5 sec</span></a
+            >
+          </li>
+          <li data-delay="15">
+            <a class="tb-bttn" href="javascript:void(0)" title=""
+              ><span>15 sec</span></a
+            >
+          </li>
+          <li data-delay="30">
+            <a class="tb-bttn" href="javascript:void(0)" title=""
+              ><span>30 sec</span></a
+            >
+          </li>
+          <li data-delay="60">
+            <a class="tb-bttn" href="javascript:void(0)" title=""
+              ><span>60 sec</span></a
+            >
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a
+          class="tb-bttn logout"
+          href="https://demo.emcosoftware.com/ping-monitor?logout=1"
+          title=""
+          ><span>Sign out</span></a
+        >
+      </li>
+    </ul>
+  </div>
+</div>
+
+<li data-value="" class="">
+  <a href="">5 Minutes</a>
+</li>
+<li data-value="" class="">
+  <a href="">15 Minutes</a>
+</li>
+<li data-value="" class="">
+  <a href="">30 Minutes</a>
+</li>
+<li data-value="" class="">
+  <a href="">60 Minutes</a>
+</li>
+<li data-value="" class="">
+  <a href="">3 Hours</a>
+</li>
+<li data-value="" class="endgroup">
+  <a href="">6 Hours</a>
+</li>
+<li data-value="" class="">
+  <a href="">Yesterday</a>
+</li>
+<li data-value="" class="">
+  <a href="">Last Week</a>
+</li>
+<li data-value="" class="">
+  <a href="">Last Month</a>
+</li>
+<li data-value="" class="">
+  <a href="">Last 7 Days</a>
+</li>
+<li data-value="" class="">
+  <a href="">Last 30 Days</a>
+</li>
+<li data-value="custom" class="">Custom Range</li>
+<!-- copy3 -->
+<div id="period-vue" class="period-wrapper vue done">
+  <div data-offset="0" data-format="" class="period-ranges">
+    <span>8</span>/<span>4</span>/<span>2</span><span>0</span><span>2</span
+    ><span>3</span> <span>1</span>:<span>0</span><span>3</span> PM -
+    <span>8</span>/<span>4</span>/<span>2</span><span>0</span><span>2</span
+    ><span>3</span> <span>1</span>:<span>0</span><span>8</span> PM
+  </div>
+  <div
+    id="period"
+    data-note=""
+    title="Period
+    Select the time interval to be used for displaying the monitoring statistics."
+    class="period chooser select"
+  >
+    <span>Period:</span>
+    <div class="placeholder">5 Minutes</div>
+    <div class="control_back"></div>
+    <ul>
+      <li></li>
+      <li>5 Minutes</li>
+      <li data-value="300" class="">
+        <a
+          href="https://demo.emcosoftware.com/ping-monitor/statistics?timezone=Asia%2fBangkok&amp;o[avg]=0"
+          >5 Minutes</a
+        >
+      </li>
+      <li data-value="900" class="">
+        <a
+          href="https://demo.emcosoftware.com/ping-monitor/statistics?timezone=Asia%2fBangkok&amp;o[avg]=0&amp;start=900"
+          >15 Minutes</a
+        >
+      </li>
+      <li data-value="1800" class="">
+        <a
+          href="https://demo.emcosoftware.com/ping-monitor/statistics?timezone=Asia%2fBangkok&amp;o[avg]=0&amp;start=1800"
+          >30 Minutes</a
+        >
+      </li>
+      <li data-value="3600" class="">
+        <a
+          href="https://demo.emcosoftware.com/ping-monitor/statistics?timezone=Asia%2fBangkok&amp;o[avg]=0&amp;start=3600"
+          >60 Minutes</a
+        >
+      </li>
+      <li data-value="10800" class="">
+        <a
+          href="https://demo.emcosoftware.com/ping-monitor/statistics?timezone=Asia%2fBangkok&amp;o[avg]=0&amp;start=10800"
+          >3 Hours</a
+        >
+      </li>
+      <li data-value="21600" class="endgroup">
+        <a
+          href="https://demo.emcosoftware.com/ping-monitor/statistics?timezone=Asia%2fBangkok&amp;o[avg]=0&amp;start=21600"
+          >6 Hours</a
+        >
+      </li>
+      <li data-value="yesterday" class="">
+        <a
+          href="https://demo.emcosoftware.com/ping-monitor/statistics?timezone=Asia%2fBangkok&amp;o[avg]=0&amp;start=yesterday"
+          >Yesterday</a
+        >
+      </li>
+      <li data-value="lastweek" class="">
+        <a
+          href="https://demo.emcosoftware.com/ping-monitor/statistics?timezone=Asia%2fBangkok&amp;o[avg]=0&amp;start=lastweek"
+          >Last Week</a
+        >
+      </li>
+      <li data-value="lastmonth" class="">
+        <a
+          href="https://demo.emcosoftware.com/ping-monitor/statistics?timezone=Asia%2fBangkok&amp;o[avg]=0&amp;start=lastmonth"
+          >Last Month</a
+        >
+      </li>
+      <li data-value="last7days" class="">
+        <a
+          href="https://demo.emcosoftware.com/ping-monitor/statistics?timezone=Asia%2fBangkok&amp;o[avg]=0&amp;start=last7days"
+          >Last 7 Days</a
+        >
+      </li>
+      <li data-value="last30days" class="">
+        <a
+          href="https://demo.emcosoftware.com/ping-monitor/statistics?timezone=Asia%2fBangkok&amp;o[avg]=0&amp;start=last30days"
+          >Last 30 Days</a
+        >
+      </li>
+      <li data-value="custom" class="">Custom Range</li>
+    </ul>
+  </div>
+  <div class="dh">
+    <input
+      type="hidden"
+      id="drf"
+      value=""
+      autocomplete="off"
+      class="daterange"
+      style="display: none"
+    /><button
+      type="button"
+      class="comiseo-daterangepicker-triggerbutton ui-button ui-corner-all ui-widget comiseo-daterangepicker-bottom"
+      id="drp_autogen0"
+    >
+      <span class="ui-button-icon-space"> </span
+      ><span class="ui-button-icon ui-icon ui-icon-triangle-1-s"></span>
+    </button>
+  </div>
+</div>
