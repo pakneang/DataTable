@@ -28,7 +28,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         $insert_run = mysqli_query($conn, $insert);
         $edit = "UPDATE station_host SET status_onlineoffline = 'Online' , check_tb = 0 WHERE ip_address = '" . $ip . "'";
         $query_run = mysqli_query($conn, $edit);
-        if () {
+        if ($i == 0) {
             $TextSendRecoverOnline = "ជំរាបសួរបង," . $ip . "\n" . "\n" . "ខាងខ្ញុំបានឃើញថា Internet ខាងបងដំណើរការវិញហើយ" . "\n" . "\n" . "-ពេលវេលាមិនដំណើរការ :  " . "\n" . "-ពេលវេលាដំណើរការវិញ : " . date("d-m-y h:i:sa") . "\n" . "\n" . "អរគុណបង";
             $telegramApi = "https://api.telegram.org/bot$botToken/sendMessage?chat_id=$chatId&text=" . urlencode($TextSendRecoverOnline);
             file_get_contents($telegramApi);
