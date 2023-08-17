@@ -18,8 +18,8 @@ while ($row = mysqli_fetch_assoc($result)) {
     $ipa = $ip[0];
     $ping = exec("ping -n 1 $ip", $output, $status);
     $date_off = $row['date_off'];
-    $i = $check + 1;
-    
+    $i = $check + 1;   
+
 
     if ($status == 0) {
         $status_dataanalyst = "Online";
