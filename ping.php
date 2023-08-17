@@ -15,33 +15,55 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo $day_dataanalyst . '<br>';
 
     $ip = $row['ip_address'];
-    $ipa = $ip[0];
+    // $ipa = $ip[0];
     $ping = exec("ping -n 1 $ip", $output, $status);
     $date_off = $row['date_off'];
-    $i = $check + 1;   
+    $i = $check + 1;
 
 
     if ($status == 0) {
-        $status_dataanalyst = "Online";
-        $insert = "INSERT INTO data_analyst (station_hostid, stationname_dataanalyst, ipaddress_dataanalyst, day_dataanalyst, status_dataanalyst)
-        VALUES('$stationid_dataanylist', '$stationname_dataanylist', '$ipaddress_dataanylist', '$day_dataanalyst', '$status_dataanalyst')";
-        $insert_run = mysqli_query($conn, $insert);
-        $edit = "UPDATE station_host SET status_onlineoffline = 'Online' , check_tb = 0 WHERE ip_address = '" . $ip . "'";
-        $query_run = mysqli_query($conn, $edit);
-        if ($i == 0) {
-            $TextSendRecoverOnline = "ជំរាបសួរបង," . $ip . "\n" . "\n" . "ខាងខ្ញុំបានឃើញថា Internet ខាងបងដំណើរការវិញហើយ" . "\n" . "\n" . "-ពេលវេលាមិនដំណើរការ :  " . "\n" . "-ពេលវេលាដំណើរការវិញ : " . date("d-m-y h:i:sa") . "\n" . "\n" . "អរគុណបង";
-            $telegramApi = "https://api.telegram.org/bot$botToken/sendMessage?chat_id=$chatId&text=" . urlencode($TextSendRecoverOnline);
-            file_get_contents($telegramApi);
-        }
+
+            if($check >= 3){
+                    $TextSendRecoverOnline = "ជំរាបសួរបង," . $ip . "\n" . "\n" . "ខាងខ្ញុំបានឃើញថា Internet ខាងបងដំណើរការវិញហើយ" . "\n" . "\n" . "-ពេលវេលាមិនដំណើរការ : .$date_off. " . "\n" . "-ពេលវេលាដំណើរការវិញ : " . date("d-m-y h:i:sa") . "\n" . "\n" . "អរគុណបង";
+                    $telegramApi = "https://api.telegram.org/bot$botToken/sendMessage?chat_id=$chatId&text=" . urlencode($TextSendRecoverOnline);
+                    file_get_contents($telegramApi);
+                    $status_dataanalyst = "Online";
+                    $insert = "INSERT INTO data_analyst (station_hostid, stationname_dataanalyst, ipaddress_dataanalyst, day_dataanalyst, status_dataanalyst)
+                    VALUES('$stationid_dataanylist', '$stationname_dataanylist', '$ipaddress_dataanylist', '$day_dataanalyst', '$status_dataanalyst')";
+                    $insert_run = mysqli_query($conn, $insert);
+                    $edit = "UPDATE station_host SET status_onlineoffline = 'Online' , check_tb = 0, date_off = ''  WHERE ip_address = '" . $ip . "'";
+                    $query_run = mysqli_query($conn, $edit);
+            }
+
+    
+        
+        // if ('check_tb' == 0) {
+        //     $insert_run = mysqli_query($conn, $insert);
+        //     $edit = "UPDATE station_host SET status_onlineoffline = 'Offline', check_tb = '$i' WHERE ip_address = '" . $ip . "'";
+        //     $query_run = mysqli_query($conn, $edit);
+        //     $TextSendRecoverOnline = "ជំរាបសួរបង," . $ip . "\n" . "\n" . "ខាងខ្ញុំបានឃើញថា Internet ខាងបងដំណើរការវិញហើយ" . "\n" . "\n" . "-ពេលវេលាមិនដំណើរការ :  " . "\n" . "-ពេលវេលាដំណើរការវិញ : " . date("d-m-y h:i:sa") . "\n" . "\n" . "អរគុណបង";
+        //     $telegramApi = "https://api.telegram.org/bot$botToken/sendMessage?chat_id=$chatId&text=" . urlencode($TextSendRecoverOnline);
+        //     file_get_contents($telegramApi);
+        // }
     } else {
-        $status_dataanalyst = "Offline";
-        $date_off = $row['date_off'];
-        $insert = "INSERT INTO data_analyst (station_hostid, stationname_dataanalyst, ipaddress_dataanalyst, day_dataanalyst, status_dataanalyst)
-        VALUES('$stationid_dataanylist', '$stationname_dataanylist', '$ipaddress_dataanylist', '$day_dataanalyst', '$status_dataanalyst')";
-        $insert_run = mysqli_query($conn, $insert);
-        $edit = "UPDATE station_host SET status_onlineoffline = 'Offline', check_tb = '$i' WHERE ip_address = '" . $ip . "'";
-        $query_run = mysqli_query($conn, $edit);
-        $CountArray = $check;
+        if($check == 0){
+            
+            $status_dataanalyst = "Offline";
+      
+            $insert = "INSERT INTO data_analyst (station_hostid, stationname_dataanalyst, ipaddress_dataanalyst, day_dataanalyst, status_dataanalyst)
+            VALUES('$stationid_dataanylist', '$stationname_dataanylist', '$ipaddress_dataanylist', '$day_dataanalyst', '$status_dataanalyst')";
+            $insert_run = mysqli_query($conn, $insert);
+            $edit = "UPDATE station_host SET status_onlineoffline = 'Offline', check_tb = '$i', date_off = '$day_dataanalyst' WHERE ip_address = '" . $ip . "' ";
+            $query_run = mysqli_query($conn, $edit);
+        }
+        else{
+            $status_dataanalyst = "Offline";
+            $insert = "INSERT INTO data_analyst (station_hostid, stationname_dataanalyst, ipaddress_dataanalyst, day_dataanalyst, status_dataanalyst)
+            VALUES('$stationid_dataanylist', '$stationname_dataanylist', '$ipaddress_dataanylist', '$day_dataanalyst', '$status_dataanalyst')";
+            $insert_run = mysqli_query($conn, $insert);
+            $edit = "UPDATE station_host SET status_onlineoffline = 'Offline', check_tb = '$i' WHERE ip_address = '" . $ip . "' ";
+            $query_run = mysqli_query($conn, $edit);
+            $CountArray = $check;
         // send offline to group telegram
         if ($CountArray == 2) {
             $TextSendOffline30min = "ជំរាបសួរបង," . $ip . "\n" . "\n" . "ខាងខ្ញុំបានឃើញថា Internet ខាងបងមិនដំណើរការអស់រយៈពេលជាង 30 min ហើយ" . "\n" . "\n" . "សុំបងជួយត្រួតពិនិត្យបន្តិចបង ";
@@ -52,8 +74,8 @@ while ($row = mysqli_fetch_assoc($result)) {
             $TextSendRecoverOnline = "ជំរាបសួរបង," . $ip . "\n" . "\n" . "ខាងខ្ញុំបានឃើញថា Internet ខាងបងដំណើរការវិញហើយ" . "\n" . "\n" . "-ពេលវេលាមិនដំណើរការ :  " . "\n" . "-ពេលវេលាដំណើរការវិញ : " . date("d-m-y h:i:sa") . "\n" . "\n" . "អរគុណបង";
             $telegramApi = "https://api.telegram.org/bot$botToken/sendMessage?chat_id=$chatId&text=" . urlencode($TextSendRecoverOnline);
             file_get_contents($telegramApi);
-        } 
-        
+        }
+
         if ($CountArray == 11) {
             $TextSendOffline120min = "ជំរាបសួរបង," . $ip . "\n" . "\n" . "ខាងខ្ញុំបានឃើញថា Internet ខាងបងមិនដំណើរការអស់រយៈពេលជាង 2h ហើយ" . "\n" . "\n" . "សុំបងជួយត្រួតពិនិត្យបន្តិចបង ";
             $telegramApi = "https://api.telegram.org/bot$botToken/sendMessage?chat_id=$chatId&text=" . urlencode($TextSendOffline120min);
@@ -64,6 +86,10 @@ while ($row = mysqli_fetch_assoc($result)) {
             $telegramApi = "https://api.telegram.org/bot$botToken/sendMessage?chat_id=$chatId&text=" . urlencode($TextSendOffline240min);
             file_get_contents($telegramApi);
         }
+        }
+
+
+        
     }
 }
 
