@@ -2,7 +2,7 @@
 require_once('config.php');
 date_default_timezone_set("Asia/Bangkok"); // set time zone for report
 $botToken = "6319398116:AAH9KIjn7xvfVFq0R96lkIoCVj6to8vg5ug"; // Telegram Bot Token
-$chatId = '-954684369';
+// $chatId = '-954684369';
 $sql = "SELECT * FROM station_host WHERE id";
 $result = mysqli_query($conn, $sql);
 while ($row = mysqli_fetch_assoc($result)) {
@@ -11,6 +11,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     $stationname_dataanylist = $row['station_name'];
     $ipaddress_dataanylist = $row['ip_address'];
     $check = $row['check_tb'];
+    $g_telegram = $row['g_telegram'];
     $day_dataanalyst = date("d-m-y h:i:sa");
     echo $day_dataanalyst . '<br>';
     $ip = $row['ip_address'];
@@ -29,7 +30,7 @@ while ($row = mysqli_fetch_assoc($result)) {
             $insert = "INSERT INTO data_analyst (station_hostid, stationname_dataanalyst, ipaddress_dataanalyst, day_dataanalyst, status_dataanalyst)
             VALUES('$stationid_dataanylist', '$stationname_dataanylist', '$ipaddress_dataanylist', '$day_dataanalyst', '$status_dataanalyst')";
             $insert_run = mysqli_query($conn, $insert);
-            $edit = "UPDATE station_host SET status_onlineoffline = 'Online' , check_tb = 0, date_off = ''  WHERE ip_address = '" . $ip . "'";
+            $edit = "UPDATE station_host SET status_onlineoffline = 'Online' , check_tb = 0, date_off = ''  WHERE ip_address = '" . $ip . "', g_telegram = '".$g_telegram."'";
             $query_run = mysqli_query($conn, $edit);
         }
     } else {
@@ -39,14 +40,14 @@ while ($row = mysqli_fetch_assoc($result)) {
             $insert = "INSERT INTO data_analyst (station_hostid, stationname_dataanalyst, ipaddress_dataanalyst, day_dataanalyst, status_dataanalyst)
             VALUES('$stationid_dataanylist', '$stationname_dataanylist', '$ipaddress_dataanylist', '$day_dataanalyst', '$status_dataanalyst')";
             $insert_run = mysqli_query($conn, $insert);
-            $edit = "UPDATE station_host SET status_onlineoffline = 'Offline', check_tb = '$i', date_off = '$day_dataanalyst' WHERE ip_address = '" . $ip . "' ";
+            $edit = "UPDATE station_host SET status_onlineoffline = 'Offline', check_tb = '$i', date_off = '$day_dataanalyst' WHERE ip_address = '" . $ip . "', g_telegram = '".$g_telegram."' ";
             $query_run = mysqli_query($conn, $edit);
         } else {
             $status_dataanalyst = "Offline";
             $insert = "INSERT INTO data_analyst (station_hostid, stationname_dataanalyst, ipaddress_dataanalyst, day_dataanalyst, status_dataanalyst)
             VALUES('$stationid_dataanylist', '$stationname_dataanylist', '$ipaddress_dataanylist', '$day_dataanalyst', '$status_dataanalyst')";
             $insert_run = mysqli_query($conn, $insert);
-            $edit = "UPDATE station_host SET status_onlineoffline = 'Offline', check_tb = '$i' WHERE ip_address = '" . $ip . "' ";
+            $edit = "UPDATE station_host SET status_onlineoffline = 'Offline', check_tb = '$i' WHERE ip_address = '" . $ip . "', g_telegram = '".$g_telegram."' ";
             $query_run = mysqli_query($conn, $edit);
             $CountArray = $check;
             // send offline to group telegram when down if have beeen count.
