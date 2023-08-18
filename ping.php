@@ -33,6 +33,14 @@ while ($row = mysqli_fetch_assoc($result)) {
             $edit = "UPDATE station_host SET status_onlineoffline = 'Online' , check_tb = 0, date_off = ''  WHERE ip_address = '" . $ip . "'";
             $query_run = mysqli_query($conn, $edit);
         }
+        else{
+            $status_dataanalyst = "Online";
+            $insert = "INSERT INTO data_analyst (station_hostid, stationname_dataanalyst, ipaddress_dataanalyst, day_dataanalyst, status_dataanalyst)
+            VALUES('$stationid_dataanylist', '$stationname_dataanylist', '$ipaddress_dataanylist', '$day_dataanalyst', '$status_dataanalyst')";
+            $insert_run = mysqli_query($conn, $insert);
+            $edit = "UPDATE station_host SET status_onlineoffline = 'Online' , check_tb = 0, date_off = ''  WHERE ip_address = '" . $ip . "'";
+            $query_run = mysqli_query($conn, $edit);
+        }
     } else {
         if ($check == 0) {
 
