@@ -52,27 +52,40 @@ if (!empty($search_query)) {
 $result = mysqli_query($conn, $sql);
 
 // Checkbox
-// if (isset($_GET['id'])) {
-//     $update_id = $_GET['id'];
+
+// $sql = "SELECT * FROM station_host WHERE id";
+// $result = mysqli_query($conn, $sql);
+// if ($row = mysqli_fetch_assoc($result)) {
+//     $id = $row['id'];
+//     $status_sendingtelegram = $row['status_sendingtelegram'];
+//     $edit = "UPDATE station_host SET status_sendingtelegram = 'Active' WHERE ip_address = '" . $ip . "'";
+//     $query_run = mysqli_query($conn, $edit);
+// }else{
+//     $edit = "UPDATE station_host SET status_sendingtelegram = 'Disactive' WHERE ip_address = '" . $ip . "'";
+//     $query_run = mysqli_query($conn, $edit);
+// }
+
+// if (isset($_POST['myform'])){
+//         $update_id = $_GET['id'];
 
 
-//     $status_sendingtelegram = $_POST['status_sendingtelegram'];
+//         $status_sendingtelegram = $_POST['status_sendingtelegram'];
 
-//     $query_update = "UPDATE station_host SET
+//         $query_update = "UPDATE station_host SET
 
-//   status_sendingtelegram = 'Active'
+//       status_sendingtelegram = 'Active'
 
-//     WHERE id ='" . $update_id . "'";
+//         WHERE id ='" . $update_id . "'";
 
-//     $update_run = mysqli_query($conn, $query_update);
-//     if ($query_run == true) {
-//       header("location: pr3.php");
-//       exit();
-//     } else {
-//       header("location: pr3.php");
-//       exit();
-//     }
-//   }
+//         $update_run = mysqli_query($conn, $query_update);
+//         if ($query_run == true) {
+//           header("location: pr3.php");
+//           exit();
+//         } else {
+//           header("location: pr3.php");
+//           exit();
+//         }
+// }
 
 ?>
 
@@ -107,7 +120,7 @@ $result = mysqli_query($conn, $sql);
                 chk2.value = "Active";
                 for (i = 0; i < chk2.length; i++)
                     chk2[i].checked = true;
-                    // window.location.href = "pr1.php";
+                // window.location.href = "pr1.php";
 
 
                 // $edit = "UPDATE station_host SET status_sendingtelegram = '' WHERE ip_address = '".$ip."'";
@@ -169,7 +182,7 @@ $result = mysqli_query($conn, $sql);
                                     <td><?php echo $row['g_telegram']; ?></td>
 
                                     <td>
-                                        <form name=myform action=action_page.php method=post>
+                                        <form name="myform" action=action_page.php method="post">
                                             <input class="form-check-input" name=check_list[] type="checkbox" value="" id="flexCheckDefault">
 
                                             <!-- <input type=checkbox name=check_list[] value=ASP>ASP<br>
