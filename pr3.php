@@ -51,6 +51,29 @@ if (!empty($search_query)) {
 
 $result = mysqli_query($conn, $sql);
 
+// Checkbox
+// if (isset($_GET['id'])) {
+//     $update_id = $_GET['id'];
+
+
+//     $status_sendingtelegram = $_POST['status_sendingtelegram'];
+
+//     $query_update = "UPDATE station_host SET
+
+//   status_sendingtelegram = 'Active'
+
+//     WHERE id ='" . $update_id . "'";
+
+//     $update_run = mysqli_query($conn, $query_update);
+//     if ($query_run == true) {
+//       header("location: pr3.php");
+//       exit();
+//     } else {
+//       header("location: pr3.php");
+//       exit();
+//     }
+//   }
+
 ?>
 
 <!DOCTYPE html>
@@ -80,17 +103,23 @@ $result = mysqli_query($conn, $sql);
             chk2 = document.getElementsByName('check_list[]')
 
             if (chk.checked == true) {
+                chk.value = "Active";
+                chk2.value = "Active";
                 for (i = 0; i < chk2.length; i++)
                     chk2[i].checked = true;
-                    
-                    
-                    // $edit = "UPDATE station_host SET status_sendingtelegram = '' WHERE ip_address = '".$ip."'";
-                    // $query_run = mysqli_query($conn, $edit);
+                    // window.location.href = "pr1.php";
+
+
+                // $edit = "UPDATE station_host SET status_sendingtelegram = '' WHERE ip_address = '".$ip."'";
+                // $query_run = mysqli_query($conn, $edit);
 
             } else {
+                chk.value = "Disactive";
+                chk2.value = "Disactive";
                 for (i = 0; i < chk2.length; i++)
                     chk2[i].checked = false;
-                    
+
+
             }
 
         }
@@ -141,8 +170,8 @@ $result = mysqli_query($conn, $sql);
 
                                     <td>
                                         <form name=myform action=action_page.php method=post>
-                                        <input class="form-check-input" name=check_list[] type="checkbox" value="" id="flexCheckDefault">
-                        
+                                            <input class="form-check-input" name=check_list[] type="checkbox" value="" id="flexCheckDefault">
+
                                             <!-- <input type=checkbox name=check_list[] value=ASP>ASP<br>
 
                                             <input type=checkbox name=check_list[] value=PHP>PHP<br>
