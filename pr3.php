@@ -51,43 +51,6 @@ if (!empty($search_query)) {
 
 $result = mysqli_query($conn, $sql);
 
-// $iplist = array(
-//     array("10.3.1.160", "station_name1"),
-//     array("10.3.1.146", "station_name2")
-// );
-// $i = count($iplist);
-// $results = [];
-// for($j=0;$j<$i;$j++){
-//     $ip = $iplist[$j][0];
-//     $ping = exec("ping -n 1 $ip", $output, $status);
-//     $results[] = $status;
-// }
-// Table
-// echo '<font face=Courier New>';
-// echo "<table border=1 style=border-collapse:collapse>
-// <th colspan=4> Ping </th>
-// <tr>
-// <td align=right width=20>#</td>
-// <td width=100>IP</td>
-// <td width=100>Status</td>
-// <td width=250>Description</td>
-// </tr>";
-// foreach($results as $item =>$k){
-//     echo '<tr>';
-//     echo '<td align=right>'.$item.'</td>';
-//     echo '<td>'.$iplist[$item][0].'</td>';
-//     if($results[$item]==0){
-//         echo '<td style=color:green>Online</td>';
-//     }
-//     else{
-//         echo '<td style=color:red>Offline</td>';
-//     }
-//     echo '<td>'.$iplist[$item][1].'</td>';
-//     echo '</td>';
-// }
-// echo "</table>";
-// echo '</font>';
-
 ?>
 
 <!DOCTYPE html>
@@ -109,7 +72,7 @@ $result = mysqli_query($conn, $sql);
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/datatables.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
     <script>
         function Check() {
@@ -118,10 +81,16 @@ $result = mysqli_query($conn, $sql);
 
             if (chk.checked == true) {
                 for (i = 0; i < chk2.length; i++)
-                    chk2[i].checked = true
+                    chk2[i].checked = true;
+                    
+                    
+                    // $edit = "UPDATE station_host SET status_sendingtelegram = '' WHERE ip_address = '".$ip."'";
+                    // $query_run = mysqli_query($conn, $edit);
+
             } else {
                 for (i = 0; i < chk2.length; i++)
-                    chk2[i].checked = false
+                    chk2[i].checked = false;
+                    
             }
 
         }
@@ -152,7 +121,7 @@ $result = mysqli_query($conn, $sql);
                                 <th>
                                     <!-- <input class="form-check-input" type="checkbox" name="check_list" id="inlineCheckbox1" value="option1">
                                     <label class="form-check-label" for="inlineCheckbox1">Select All</label> -->
-                                    <input type=checkbox class="form-check-input" name='my_check' value='yes' onClick=Check()>
+                                    <input type="checkbox" class="form-check-input" name="my_check" value="yes" onClick=Check()>
                                     <b>Select All</b>
                                 </th>
                             </tr>
@@ -171,7 +140,19 @@ $result = mysqli_query($conn, $sql);
                                     <td><?php echo $row['g_telegram']; ?></td>
 
                                     <td>
+                                        <form name=myform action=action_page.php method=post>
                                         <input class="form-check-input" name=check_list[] type="checkbox" value="" id="flexCheckDefault">
+                        
+                                            <!-- <input type=checkbox name=check_list[] value=ASP>ASP<br>
+
+                                            <input type=checkbox name=check_list[] value=PHP>PHP<br>
+                                            <input type=checkbox name=check_list[] value=JavaScript>JavaScript<br>
+                                            <input type=checkbox name=check_list[] value=HTML>HTML<br>
+                                            <input type=checkbox name=check_list[] value=MySQL>MySQL<br>
+                                            <input type=checkbox name='my_check' value='yes' onClick=Check()>
+                                            <b>Check Control</b>
+                                            <Input type=submit value=Submit> -->
+                                        </form>
                                     </td>
                                 </tr>
                             <?php
