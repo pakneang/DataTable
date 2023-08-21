@@ -86,7 +86,6 @@ $result = mysqli_query($conn, $sql);
 //           exit();
 //         }
 // }
-
 ?>
 
 <!DOCTYPE html>
@@ -110,7 +109,7 @@ $result = mysqli_query($conn, $sql);
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
-    <script>
+    <!-- <script>
         function Check() {
             chk = document.getElementsByName("my_check")[0]
             chk2 = document.getElementsByName('check_list[]')
@@ -120,11 +119,11 @@ $result = mysqli_query($conn, $sql);
                 chk2.value = "Active";
                 for (i = 0; i < chk2.length; i++)
                     chk2[i].checked = true;
-                // window.location.href = "pr1.php";
+                window.location.href = "pr1.php";
 
 
-                // $edit = "UPDATE station_host SET status_sendingtelegram = '' WHERE ip_address = '".$ip."'";
-                // $query_run = mysqli_query($conn, $edit);
+                $edit = "UPDATE station_host SET status_sendingtelegram = '' WHERE ip_address = '".$ip."'";
+                $query_run = mysqli_query($conn, $edit);
 
             } else {
                 chk.value = "Disactive";
@@ -135,7 +134,7 @@ $result = mysqli_query($conn, $sql);
 
             }
 
-        }
+        } -->
     </script>
 
 
@@ -161,18 +160,20 @@ $result = mysqli_query($conn, $sql);
                                 <th>IP addres</th>
                                 <th>Telegram Group Chat ID</th>
                                 <th>
-                                    <!-- <input class="form-check-input" type="checkbox" name="check_list" id="inlineCheckbox1" value="option1">
-                                    <label class="form-check-label" for="inlineCheckbox1">Select All</label> -->
-                                    <input type="checkbox" class="form-check-input" name="my_check" value="yes" onClick=Check()>
-                                    <b>Select All</b>
+                                    <form method="post" action="status1.php">
+                                        <button class="btn btn-primary" style="color: #fff; margin: -15px 0" type="submit" name="enable_all">Enable All</button>
+                                        <button class="btn btn-danger" style="color: #fff; margin: -15px 0" type="submit" name="disable_all">Disable All</button>
+                                    </form>
                                 </th>
+
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             $i = 1;
                             $sql = "SELECT * FROM station_host";
-                            // $result = mysqli_query($conn, $sql);
+
+                            $result = mysqli_query($conn, $sql);
                             while ($row = mysqli_fetch_assoc($result)) {
                             ?>
                                 <tr>
@@ -181,25 +182,22 @@ $result = mysqli_query($conn, $sql);
                                     <td><?php echo $row['ip_address']; ?></td>
                                     <td><?php echo $row['g_telegram']; ?></td>
 
-                                    <td>
-                                        <form name="myform" action=action_page.php method="post">
-                                            <input class="form-check-input" name=check_list[] type="checkbox" value="" id="flexCheckDefault">
-
-                                            <!-- <input type=checkbox name=check_list[] value=ASP>ASP<br>
-
-                                            <input type=checkbox name=check_list[] value=PHP>PHP<br>
-                                            <input type=checkbox name=check_list[] value=JavaScript>JavaScript<br>
-                                            <input type=checkbox name=check_list[] value=HTML>HTML<br>
-                                            <input type=checkbox name=check_list[] value=MySQL>MySQL<br>
-                                            <input type=checkbox name='my_check' value='yes' onClick=Check()>
-                                            <b>Check Control</b>
-                                            <Input type=submit value=Submit> -->
-                                        </form>
+                                    <td style="padding: -10px 0;">
+                                        <?php
+                                        if ($row['status_sendingtelegram'] == 1) {
+                                            // $id = $_GET['station_id'];
+                                            // $status = $_GET['status_sendingtelegram'];
+                                            // $sql1 = "UPDATE station_host SET status_sendingtelegram = $status WHERE station_id = $id";
+                                            echo ' <button class="btn btn-primary" ><a style="color: #fff;" href = "status.php?station_id=' . $row['station_id'] . '&status_sendingtelegram=0" >enable</a></button>';
+                                        } else {
+                                            echo ' <button class="btn btn-danger" ><a style="color: #fff;" href = "status.php?station_id=' . $row['station_id'] . '&status_sendingtelegram=1" >disable</a></button>';
+                                        }
+                                        ?>
                                     </td>
+
+
+                                <?php } ?>
                                 </tr>
-                            <?php
-                            }
-                            ?>
                         </tbody>
                     </table>
                 </div>

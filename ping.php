@@ -1,11 +1,12 @@
 <?php
-require_once('config.php');
+require_once "config.php";
 date_default_timezone_set("Asia/Bangkok"); // set time zone for report
 $botToken = "6319398116:AAH9KIjn7xvfVFq0R96lkIoCVj6to8vg5ug"; // Telegram Bot Token
 // $chatId = '-954684369';
 $sql = "SELECT * FROM station_host WHERE id";
 $result = mysqli_query($conn, $sql);
-while ($row = mysqli_fetch_assoc($result)) {
+while ($row = mysqli_fetch_assoc($result)) 
+{
 
     $stationid_dataanylist = $row['station_id'];
     $stationname_dataanylist = $row['station_name'];
@@ -15,6 +16,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     $day_dataanalyst = date("d-m-y h:i:sa");
     echo $day_dataanalyst . '<br>';
     $ip = $row['ip_address'];
+    $status_status_sendingtelegram = $row['status_sendingtelegram'];
     $ping = exec("ping -n 1 $ip", $output, $status);
     $date_off = $row['date_off'];
     $i = $check + 1;
@@ -23,9 +25,14 @@ while ($row = mysqli_fetch_assoc($result)) {
     if ($status == 0) {
         //recovery when Ping back to online  
         if ($check >= 3) {
+            if($row['status_sendingtelegram'] == 1){
             $TextSendRecoverOnline = "ជំរាបសួរបង," . $ip . "\n" . "\n" . "ខាងខ្ញុំបានឃើញថា Internet ខាងបងដំណើរការវិញហើយ" . "\n" . "\n" . "-ពេលវេលាមិនដំណើរការ : .$date_off. " . "\n" . "-ពេលវេលាដំណើរការវិញ : " . date("d-m-y h:i:sa") . "\n" . "\n" . "អរគុណបង";
             $telegramApi = "https://api.telegram.org/bot$botToken/sendMessage?chat_id=$g_telegram&text=" . urlencode($TextSendRecoverOnline);
             file_get_contents($telegramApi);
+            }else
+            {
+                echo"";
+            }
             $status_dataanalyst = "Online";
             $insert = "INSERT INTO data_analyst (station_hostid, stationname_dataanalyst, ipaddress_dataanalyst, day_dataanalyst, status_dataanalyst)
             VALUES('$stationid_dataanylist', '$stationname_dataanylist', '$ipaddress_dataanylist', '$day_dataanalyst', '$status_dataanalyst')";
@@ -38,18 +45,20 @@ while ($row = mysqli_fetch_assoc($result)) {
             $insert = "INSERT INTO data_analyst (station_hostid, stationname_dataanalyst, ipaddress_dataanalyst, day_dataanalyst, status_dataanalyst)
             VALUES('$stationid_dataanylist', '$stationname_dataanylist', '$ipaddress_dataanylist', '$day_dataanalyst', '$status_dataanalyst')";
             $insert_run = mysqli_query($conn, $insert);
-            $edit = "UPDATE station_host SET status_onlineoffline = 'Online' , check_tb = 0, date_off = ''  WHERE ip_address = '" . $ip . "'";
+            $edit = "UPDATE station_host SET status_onlineoffline = 'Online' , check_tb = 0, date_off = '' WHERE ip_address = '" . $ip . "'";
             $query_run = mysqli_query($conn, $edit);
         }
-    } else {
+    } //check is ping ip is down or offline
+    else {
+        //refresh page to count the time of refresh but this store datetime of the first of refreshing. 
         if ($check == 0) {
-
-            $status_dataanalyst = "Offline";
+         $status_dataanalyst = "Offline";
             $insert = "INSERT INTO data_analyst (station_hostid, stationname_dataanalyst, ipaddress_dataanalyst, day_dataanalyst, status_dataanalyst)
             VALUES('$stationid_dataanylist', '$stationname_dataanylist', '$ipaddress_dataanylist', '$day_dataanalyst', '$status_dataanalyst')";
             $insert_run = mysqli_query($conn, $insert);
             $edit = "UPDATE station_host SET status_onlineoffline = 'Offline', check_tb = '$i', date_off = '$day_dataanalyst' WHERE ip_address = '" . $ip . "' ";
             $query_run = mysqli_query($conn, $edit);
+
         } else {
             $status_dataanalyst = "Offline";
             $insert = "INSERT INTO data_analyst (station_hostid, stationname_dataanalyst, ipaddress_dataanalyst, day_dataanalyst, status_dataanalyst)
@@ -57,24 +66,10 @@ while ($row = mysqli_fetch_assoc($result)) {
             $insert_run = mysqli_query($conn, $insert);
             $edit = "UPDATE station_host SET status_onlineoffline = 'Offline', check_tb = '$i' WHERE ip_address = '" . $ip . "' ";
             $query_run = mysqli_query($conn, $edit);
+            //conditoin if we check that enable or disable
+            if($row['status_sendingtelegram'] == 1){
             $CountArray = $check;
-            // send offline to group telegram when down if have beeen count.
-            // if ($CountArray == 2) {
-            //     $TextSendOffline30min = "ជំរាបសួរបង," . $ip . "\n" . "\n" . "ខាងខ្ញុំបានឃើញថា Internet ខាងបងមិនដំណើរការអស់រយៈពេលជាង 30 min ហើយ" . "\n" . "\n" . "សុំបងជួយត្រួតពិនិត្យបន្តិចបង ";
-            //     $telegramApi = "https://api.telegram.org/bot$botToken/sendMessage?chat_id=$chatId&text=" . urlencode($TextSendOffline30min);
-            //     file_get_contents($telegramApi);
-            // }
-            // if ($CountArray == 11) {
-            //     $TextSendOffline120min = "ជំរាបសួរបង," . $ip . "\n" . "\n" . "ខាងខ្ញុំបានឃើញថា Internet ខាងបងមិនដំណើរការអស់រយៈពេលជាង 2h ហើយ" . "\n" . "\n" . "សុំបងជួយត្រួតពិនិត្យបន្តិចបង ";
-            //     $telegramApi = "https://api.telegram.org/bot$botToken/sendMessage?chat_id=$chatId&text=" . urlencode($TextSendOffline120min);
-            //     file_get_contents($telegramApi);
-            // }
-            // if ($CountArray == 23) {
-            //     $TextSendOffline240min = "ជំរាបសួរបង," . $ip . "\n" . "\n" . "ខាងខ្ញុំបានឃើញថា Internet ខាងបងមិនដំណើរការអស់រយៈពេលជាង 4h ហើយ" . "\n" . "\n" . "សុំបងជួយត្រួតពិនិត្យបន្តិចបង ";
-            //     $telegramApi = "https://api.telegram.org/bot$botToken/sendMessage?chat_id=$chatId&text=" . urlencode($TextSendOffline240min);
-            //     file_get_contents($telegramApi);
-            // }
-
+                 
             switch ($CountArray)
              {
                 case 2:
@@ -118,16 +113,21 @@ while ($row = mysqli_fetch_assoc($result)) {
                     file_get_contents($telegramApi);
                     break;
             }
-        }
+        
+            
+        
+    }else{
+        echo
+    }
     }
 }
-
+}
 ?>
-<script>
+<!-- <script>
     $(document).ready(function() {
         setInterval(function() {
             $("#autorefresh1").load(window.location.href + " #autorefresh1");
         }, 1000);
         return (0);
     });
-</script>
+</script> -->
