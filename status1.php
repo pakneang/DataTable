@@ -1,8 +1,6 @@
 <?php
 include('config.php');
-
 // Assuming you have a valid database connection
-
 if (isset($_POST['enable_all'])) {
     $status = 1;
 } elseif (isset($_POST['disable_all'])) {
@@ -20,6 +18,5 @@ if ($result) {
 } else {
     echo "Error updating rows: " . mysqli_error($conn);
 }
-
 header('location:pagevent.php');
 ?>
