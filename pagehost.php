@@ -1,25 +1,10 @@
 <?php
 require_once('config.php');
-
-// search
-// if (isset($_POST['search'])){
-//   $searchq = $_POST['search'];
-//   $searchq = preg_replace("#[^0-9a-z]#i", "", $searchq);
-
-//   $query = mysqli
-// }
-
-// search
-
-
 if (isset($_POST['search'])) {
     $search = $_POST['search'];
-
-    $sql = "SELECT * FROM station_host WHERE station_name like
-          '%$search%'";
+    $sql = "SELECT * FROM station_host WHERE station_name like '%$search%'";
     $result = mysqli_query($conn, $sql);
 }
-
 if (isset($_POST['submit1'])) {
     $station_id = $_POST['station_id'];
     $station_name = $_POST['station_name'];
@@ -30,16 +15,13 @@ if (isset($_POST['submit1'])) {
     $insert_run = mysqli_query($conn, $insert);
     if ($insert_run) {
         $message = "Insert data is successfully";
-        header("location: pr1.php");
+        header("location: pagehost.php");
         exit();
     } else {
         $message = "Insert data is not successfully";
     }
 }
-
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,17 +36,9 @@ if (isset($_POST['submit1'])) {
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- ========================================================= -->
-
-
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/datatables.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
-
-
-
-
-
-
 </head>
 <!-- =============== Design & Develop By = MJ MARAZ   ====================== -->
 
@@ -81,7 +55,7 @@ if (isset($_POST['submit1'])) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="pr1.php" method="post">
+                    <form action="pagehost.php" method="post">
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Station ID :</label>
                             <input type="text" name="station_id" class="form-control" id="recipient-name" required>
@@ -105,7 +79,6 @@ if (isset($_POST['submit1'])) {
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>
@@ -115,10 +88,9 @@ if (isset($_POST['submit1'])) {
             <div class="col-12">
                 <div class="data_table">
                     <div class="host-a">
-                        <h4>Host</h4>
-                        <a href="" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" style="margin-left: 10px; margin-top: 0;">add</a>
+                        <h4 style="padding-left: 10px;">Host</h4>
+                        <a href="" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">add</a>
                     </div>
-
                     <table id="example" class="table table-striped table-bordered">
                         <thead class="table-green">
                             <tr style="background: #1327df; color: #fff;">
@@ -141,7 +113,6 @@ if (isset($_POST['submit1'])) {
                                     <td><?php echo $row['station_name']; ?></td>
                                     <td><?php echo $row['ip_address']; ?></td>
                                     <td><?php echo $row['g_telegram']; ?></td>
-
                                     <td>
                                         <a class=' btn-primary btn-sm btn1' data-bs-toggle="modal" data-bs-target="#exampleModal-2<?= $row['id']; ?>" data-bs-whatever="@mdo" href="edit.php?id=<?= $row['id']; ?>">Edit</a>
                                         <a href='' class=' btn-danger btn-sm btn1' data-bs-toggle="modal" data-bs-target="#exampleModal-3<?= $row['id']; ?>">delete</a>
@@ -188,7 +159,6 @@ if (isset($_POST['submit1'])) {
                                     </div>
                                 </div>
                                 <!-- end edit -->
-
                                 <!-- start delete -->
                                 <div class="modal fade" id="exampleModal-3<?= $row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -207,7 +177,6 @@ if (isset($_POST['submit1'])) {
                                         </div>
                                     </div>
                                 </div>
-
                             <?php
                             }
                             ?>
@@ -219,18 +188,12 @@ if (isset($_POST['submit1'])) {
     </div>
     <!-- =======  Data-Table  = End  ===================== -->
     <!-- ============ Java Script Files  ================== -->
-
-
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/jquery-3.6.0.min.js"></script>
     <script src="assets/js/datatables.min.js"></script>
     <script src="assets/js/pdfmake.min.js"></script>
     <script src="assets/js/vfs_fonts.js"></script>
     <script src="assets/js/custom.js"></script>
-
-
-
-
 </body>
 
 </html>

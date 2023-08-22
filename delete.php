@@ -5,10 +5,10 @@ include("config.php");
     $delete ="DELETE FROM station_host WHERE id ='".$id."'";
     $query_run = mysqli_query($conn,$delete);
     if($query_run){
-        header("location:pr1.php");
+        header("location:pagehost.php");
         exit();
     }else{
-        header("location:pr1.php");
+        header("location:pagehost.php");
         exit();
     }
  }

@@ -4,7 +4,7 @@ $(document).ready(function(){
     
     var table = $('#example').DataTable({
         
-        buttons:['copy', 'csv', 'excel', 'pdf', 'print']
+        buttons:['excel', 'pdf', 'print']
         
     });
     

@@ -13,8 +13,7 @@ while ($row = mysqli_fetch_assoc($result))
     $ipaddress_dataanylist = $row['ip_address'];
     $check = $row['check_tb'];
     $g_telegram = $row['g_telegram'];
-    $day_dataanalyst = date("d-m-y h:i:sa");
-    echo $day_dataanalyst . '<br>';
+    $day_dataanalyst = date("Y-m-d h:i:sa");
     $ip = $row['ip_address'];
     $status_status_sendingtelegram = $row['status_sendingtelegram'];
     $ping = exec("ping -n 1 $ip", $output, $status);
@@ -117,7 +116,7 @@ while ($row = mysqli_fetch_assoc($result))
             
         
     }else{
-        echo
+        echo "";
     }
     }
 }

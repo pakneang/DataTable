@@ -8,28 +8,9 @@ if (isset($_POST['search'])) {
           '%$search%'";
     $result = mysqli_query($conn, $sql);
 }
-
-if (isset($_POST['submit1'])) {
-    $station_id = $_POST['station_id'];
-    $station_name = $_POST['station_name'];
-    $ip_address = $_POST['ip_address'];
-    $g_telegram = $_POST['g_telegram'];
-    $insert = "INSERT INTO station_host (station_id, station_name,	ip_address,	g_telegram)
-      VALUES('$station_id', '$station_name',	'$ip_address',	'$g_telegram')";
-    $insert_run = mysqli_query($conn, $insert);
-    if ($insert_run) {
-        $message = "Insert data is successfully";
-        header("location: pr1.php");
-        exit();
-    } else {
-        $message = "Insert data is not successfully";
-    }
-}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -48,7 +29,6 @@ if (isset($_POST['submit1'])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 <!-- =============== Design & Develop By = MJ MARAZ   ====================== -->
-
 <body>
     <header class="header_part">
         <a href="index.php"><img src="assets/images/about-logo.png" alt="" class="img-fluid"></a>
@@ -60,7 +40,6 @@ if (isset($_POST['submit1'])) {
             <div>
                 <div class="dropdown">
                     <div class="divd">
-
                     </div>
                 </div>
             </div>
@@ -70,41 +49,11 @@ if (isset($_POST['submit1'])) {
                 if (isset($_GET['station_name'])) {
                     echo $_GET['station_name'];
                     // echo $_GET['ip_address'];
-
                 }
                 ?>
             </h5>
         </div>
-
         <div class="col-6 statit_chart">
-            <div class="col-12 statit_time">
-                <h5>statistics</h5>
-                <div class="statit_timespan">
-                    <span>Downtime</span><span class="echo"><?php
-                                                            $id = $_GET['station_name'];
-
-                                                            $count = "SELECT COUNT(status_dataanalyst) AS count FROM data_analyst WHERE stationname_dataanalyst='" . $id . "' AND status_dataanalyst='Offline'";
-                                                            $count_run1 = mysqli_query($conn, $count);
-                                                            $numCounter1 = mysqli_fetch_assoc($count_run1);
-                                                            // echo $id;           
-                                                            echo $numCounter1['count'];
-                                                            $countOffline = $numCounter1;
-
-                                                            ?></span>
-                    <div>
-                        <span>Uptime</span><span class="echo"><?php
-                        // code b rothana
-                                                                $id = $_GET['station_name'];
-                                                                $count = "SELECT COUNT(status_dataanalyst) AS count FROM data_analyst WHERE stationname_dataanalyst='" . $id . "' AND status_dataanalyst='Online'";
-                                                                $count_run0 = mysqli_query($conn, $count);
-                                                                $numCounter0 = mysqli_fetch_assoc($count_run0);
-                                                                echo $numCounter0['count'];
-                                                                $countOnline = $numCounter0;
-
-                                                                ?></span>
-                    </div>
-                </div>
-            </div>
             <div class="col-12 statit_bar">
                 <h5>statistics</h5>
                 <div class="m-chart">
@@ -234,8 +183,8 @@ if (isset($_POST['submit1'])) {
         <!-- ============ Java Script Files  ================== -->
 
         <?php
-        $c0 = $numCounter0['count'];
-        $c1 = $numCounter1['count'];
+        $c0 = $OnlineCount;
+        $c1 = $OfflineCount;
         ?>
         <!-- Script -->
         <script src='jquery-3.3.1.js' type='text/javascript'></script>
@@ -260,7 +209,7 @@ if (isset($_POST['submit1'])) {
             const yValues = [MyJSStringVar, MyJSNumVar];
             const barColors = ["#008000", "#b91d47"];
             new Chart("myChart", {
-                type: "bar",
+                type: "doughnut",
                 data: {
                     labels: xValues,
                     datasets: [{

@@ -1,13 +1,5 @@
 <?php
-require_once('config.php');
-
-// search
-// if (isset($_POST['search'])){
-//   $searchq = $_POST['search'];
-//   $searchq = preg_replace("#[^0-9a-z]#i", "", $searchq);
-
-//   $query = mysqli
-// }
+require_once"config.php";
 
 // search
 
@@ -30,7 +22,7 @@ if (isset($_POST['submit1'])) {
     $insert_run = mysqli_query($conn, $insert);
     if ($insert_run) {
         $message = "Insert data is successfully";
-        header("location: pr1.php");
+        header("location: pagehost.php");
         exit();
     } else {
         $message = "Insert data is not successfully";
@@ -238,12 +230,12 @@ foreach ($results as $item => $k) {
                                         <p>Statistics</p>
                                     </button>
                                 </a>
-                                <a href="pr1.php">
+                                <a href="pagehost.php">
                                     <button type="button" class="btn btn-red">
                                         <p>Hosts</p>
                                     </button>
                                 </a>
-                                <a href="pr3.php">
+                                <a href="pagevent.php">
                                     <button type="button" class="btn btn-blue">
                                         <p>Connectivity Events</p>
                                     </button>
@@ -269,7 +261,7 @@ foreach ($results as $item => $k) {
                                 <?php
                                 $i = 1;
                                 $sql = "SELECT * FROM station_host";
-                                // $result = mysqli_query($conn, $sql);
+                                $result = mysqli_query($conn, $sql);
                                 while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
                                     <tr>

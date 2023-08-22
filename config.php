@@ -1,6 +1,6 @@
 <?php
-    
-    $servername = "localhost:3306";
+    session_start();
+    $servername = "localhost";
     $username = "root";
     $password = "";
     $db = "d_ptt";
@@ -8,5 +8,4 @@
     if(!$conn){
       die("Can't Connect to db");
     }
-    session_start();
-?>33
+?>

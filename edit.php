@@ -16,10 +16,10 @@ if(isset($_POST['edit1'])){
     WHERE id = '".$id."' ";
     $query_run = mysqli_query($conn, $edit);
     if($query_run == true){
-        header("location:pr1.php");
+        header("location:pagehost.php");
         exit();
     }else{
-        header("location:pr1.php");
+        header("location:pagehost.php");
         exit();
     }
 

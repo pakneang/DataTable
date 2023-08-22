@@ -21,5 +21,5 @@ if ($result) {
     echo "Error updating rows: " . mysqli_error($conn);
 }
 
-header('location:pr3.php');
+header('location:pagevent.php');
 ?>
